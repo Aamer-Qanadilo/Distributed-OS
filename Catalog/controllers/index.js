@@ -18,8 +18,30 @@ const catalogControllers = {
       if (err) {
         return res.status(500).json({ error: "Internal Server Error" });
       }
-      if (!catalog) return res.status(404).json({ message: "Not Found" });
+      if (!catalog) return res.status(404).json({ message: "book not found." });
       return res.status(200).json({ message: "success", data: catalog });
+    });
+  },
+  updateCatalogById: (req, res) => {
+    const { id } = req.params;
+    const { title, quantity, price, topic } = req.body;
+    const sqlSelect = `SELECT id FROM books WHERE id = ?`;
+    const sqlUpdate = `UPDATE books SET title = ?, quantity = ?, price = ?, topic = ? WHERE id = ?`;
+    db.get(sqlSelect, [id], (err, row) => {
+      if (err) {
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+      if (!row) {
+        return res.status(404).json({ error: "Book not found" });
+      }
+      db.run(sqlUpdate, [title, quantity, price, topic, id], (err) => {
+        if (err) {
+          return res.status(500).json({ error: "Internal Server Error" });
+        }
+        return res
+          .status(200)
+          .json({ message: "book is updated successfully!" });
+      });
     });
   },
   getBooksByTopic: (req, res) => {
