@@ -5,12 +5,13 @@ const catalogRoutes = Router();
 
 // GET METHODS
 catalogRoutes.get("/search/:topic", catalogControllers.getBooksByTopic);
-catalogRoutes.get("/info/:id",catalogControllers.getBookById)
+catalogRoutes.get("/info/:id", catalogControllers.getBookById);
 
 // POST METHODS
 catalogRoutes.post("/info", catalogControllers.addBook);
 
 // PUT METHODS
-catalogRoutes.put("/info/:id",catalogControllers.updateBookById)
+catalogRoutes.put("/info/:id", catalogControllers.updateBookById);
+catalogRoutes.put("/purchase/:id", catalogControllers.purchaseBookById);
 
 export default catalogRoutes;
