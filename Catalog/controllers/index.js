@@ -1,7 +1,7 @@
 import { db } from "#Catalog/database/db.connection.js";
 
 const catalogControllers = {
-  addCatalog: (req, res) => {
+  addBook: (req, res) => {
     const { title, quantity, price, topic } = req.body;
 
     const insert = `INSERT INTO books(title,quantity,price,topic) VALUES (?,?,?,?)`;
@@ -11,7 +11,7 @@ const catalogControllers = {
 
     res.json({ message: "success", data: { title, quantity, price, topic } });
   },
-  getCatalogById: (req, res) => {
+  getBookById: (req, res) => {
     const { id } = req.params;
     const sql = `SELECT * FROM books WHERE id = ?`;
     db.get(sql, id, (err, catalog) => {
@@ -22,7 +22,7 @@ const catalogControllers = {
       return res.status(200).json({ message: "success", data: catalog });
     });
   },
-  updateCatalogById: (req, res) => {
+  updateBookById: (req, res) => {
     const { id } = req.params;
     const { title, quantity, price, topic } = req.body;
     const sqlSelect = `SELECT id FROM books WHERE id = ?`;
