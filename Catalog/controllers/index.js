@@ -11,6 +11,17 @@ const catalogControllers = {
 
     res.json({ message: "success", data: { title, quantity, price, topic } });
   },
+  getCatalogById: (req, res) => {
+    const { id } = req.params;
+    const sql = `SELECT * FROM books WHERE id = ?`;
+    db.get(sql, id, (err, catalog) => {
+      if (err) {
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+      if (!catalog) return res.status(404).json({ message: "Not Found" });
+      return res.status(200).json({ message: "success", data: catalog });
+    });
+  },
   getBooksByTopic: (req, res) => {
     const { topic } = req.params;
 

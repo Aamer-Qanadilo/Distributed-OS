@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cs": "nodemon --cwd ./Catalog ",
+    "cs": "nodemon --cwd ./Catalog",
     "os": "nodemon --cwd ./Order ",
     "start": "npm-run-all --parallel cs os"
   },
