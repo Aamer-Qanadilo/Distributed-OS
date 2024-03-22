@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "#Catalog/*": ["./Catalog/*"],
+      "#Order/*": ["./Order/*"]
+    }
+  }
+}
