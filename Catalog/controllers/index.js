@@ -44,6 +44,33 @@ const catalogControllers = {
       });
     });
   },
+  purchaseBookById: (req, res) => {
+    const { id } = req.params;
+
+    const sqlSelect = `SELECT * FROM books WHERE id = ?`;
+    const sqlUpdate = `UPDATE books SET quantity = ? WHERE id = ?`;
+    db.get(sqlSelect, [id], (err, row) => {
+      if (err) {
+        return res.status(500).json({ error: "Internal Server Error" });
+      }
+
+      if (!row || row.quantity <= 0) {
+        return res.status(404).json({ error: "Book not found" });
+      }
+
+      db.run(sqlUpdate, [row.quantity - 1, id], (err) => {
+        if (err) {
+          return res.status(500).json({ error: "Internal Server Error" });
+        }
+        return res
+          .status(200)
+          .json({
+            message: "success",
+            data: { ...row, quantity: row.quantity - 1 },
+          });
+      });
+    });
+  },
   getBooksByTopic: (req, res) => {
     const { topic } = req.params;
 
