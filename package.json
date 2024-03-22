@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cs": "nodemon --cwd ./Catalog ",
+    "cs": "nodemon --cwd ./Catalog",
     "os": "nodemon --cwd ./Order ",
     "start": "npm-run-all --parallel cs os"
   },
@@ -19,7 +19,9 @@
   },
   "dependencies": {
     "axios": "^1.6.8",
-    "express": "^4.19.1"
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "nodemon": "^3.1.0",
